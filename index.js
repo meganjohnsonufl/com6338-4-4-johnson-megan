@@ -23,20 +23,6 @@ var correct = 0;
 var incorrect = 0;
 
 document.querySelector('#word-to-guess').textContent = displayedWord;
-  correct = 0;
-  incorrect = 0;
-
-document.onkeyup = function(bananas) {
-  var key = bananas.key;
-  console.log(key);
-}
-
-document.onkeyup = function(javascript) {
-  var key = javascript.key;
-  console.log(key);
-  previousWord = "bananas";
-  lastWord.textContent = previousWord;
-}
 
 function initializeGame() {
   currentWord = words[Math.floor(Math.random() * words.length)];
@@ -48,7 +34,6 @@ function initializeGame() {
   document.getElementById('word-to-guess').textContent = displayedWord;
   document.getElementById('incorrect-letters').textContent = '';
   document.getElementById('remaining-guesses').textContent = remainingGuesses;
-  document.getElementById('previous-word').textContent = '';
   document.getElementById('wins').textContent = wins;
   document.getElementById('losses').textContent = losses;
 }
@@ -65,9 +50,6 @@ function handleGuess(letter) {
       displayedWord = updatedDisplayedWord.join('');
       document.getElementById('word-to-guess').textContent = displayedWord;
 
-      if (incorrectLetters.includes(letter) || displayedWord.includes(letter)) {
-        return;
-      }
 
       if (!displayedWord.includes('_')) {
         wins++;
@@ -92,7 +74,7 @@ function handleGuess(letter) {
   }
 }
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keyup', function(event) {
   handleGuess(event.key.toLowerCase());
 });
 
